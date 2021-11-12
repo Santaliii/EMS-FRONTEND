@@ -13,31 +13,41 @@ const AddEmployee: React.FC<IAddEmployeeProps> = ({onAdd}: IAddEmployeeProps) =>
 
   const navigate = useNavigate()
 
-  const onSubmit = (e: any) => {
+
+  // Function for input sanitization.
+  const onSubmit = async (e: any) => {
     e.preventDefault()
 
-    if(
-      firstName.length === 0 || lastName.length === 0 ||
-      email.length === 0)
+    // Check if any input is missing
+    if(firstName.length === 0 || lastName.length === 0 || email.length === 0)
         alert("Missing required field(s)")
+    // Regex to match the email with a valid email entry
+    else if(!email.match('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$'))
+        alert("Please enter a valid email address")
+    // If everything checks out, begin employee addition process and clear input
     else{
-      onAdd({firstName, lastName, email})
-      setFirstName('')
-      setLastName('')
-      setEmail('')
-      navigate("/")
+
+        // Contact server (which contacts DB) to check if given email already exists.
+        const res = await fetch(`http://localhost:8080/api/v1/employees/checkemail/${email}`)
+        // If the response returns with an OK response (meaning to conflict error is thrown), add the new employee into the system.
+        if(res.ok){
+          onAdd({firstName, lastName, email})
+          setFirstName('')
+          setLastName('')
+          setEmail('')
+          navigate("/")
+        }
+        // If the response does not return with an OK response, notify the client that the email is a duplicate.
+        else
+          alert("Email belongs to another employee")    
     }
-
-
   }
 
   const onClear = (e: any) => {
     e.preventDefault()
-    
       setFirstName('')
       setLastName('')
       setEmail('')
-    
   }
 
 

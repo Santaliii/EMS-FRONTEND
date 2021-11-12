@@ -57,6 +57,16 @@ body {
     transform: scale(1.05);
 }
 
+.search-employee {
+    margin: auto;
+    max-width: 400px;
+}
+
+.search-icon {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
 .employee-container {
     text-align: center;
 }
@@ -98,11 +108,11 @@ body {
 
 .employee-table tbody tr {
     border-bottom: 2px solid lightgray;
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, background-color 0.3s ease;
 }
 
-.employee-table tbody tr {
-    transform: scale(1.03);
+.employee-table tbody tr:hover {
+    transform: scale(1.02);
 }
 
 
@@ -128,8 +138,10 @@ body {
 }
 
 .crud-button {
-    height: 3rem;
-    width: 5rem;
+    font-family: 'Poppins', sans-serif;
+    height: 2.8rem;
+    width: 4.6rem;
+    box-shadow: 0 0 5px black;
     border-radius: 0.5rem;
     border: none;
     background-color: black;
@@ -137,11 +149,11 @@ body {
     cursor: pointer;
     font-size: 1rem;
     margin: 0.5rem;
-    transition: background-color 0.2s, box-shadow 0.2s ease;
+    transition: box-shadow .2s ease;
 }
 
 .crud-button:active {
-    transform: scale(1.05);
+    transform: scale(0.95);
 }
 
 .crud-button:hover {
@@ -183,7 +195,9 @@ body {
     color: red;
 }
 
-.form-element input {
+.form-element input,
+.search-employee input {
+    font-family: 'Poppins', sans-serif;
     border: none;
     background-color: transparent;
     border-bottom: 1px solid;
@@ -191,7 +205,8 @@ body {
     font-size: 1rem;
 }
 
-.form-element input:focus {
+.form-element input:focus,
+.search-employee input:focus {
     outline: none;
     border-bottom: 2.5px solid blue;
 }

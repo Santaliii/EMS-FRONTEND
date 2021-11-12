@@ -24,9 +24,16 @@ const App: React.FC = () => {
   }, [employees])
 
 
+  const getEmployeeById = async (employeeId: string) => {
+    // Sets employee to either a correct object or an empty one if no employee exists with that ID. 
+    const employee = await EmployeeService.getEmployeeById(employeeId)
+    // Checks if the returned object is empty (employee with that id does not exist)
+    JSON.stringify(employee) === JSON.stringify({}) ? alert(`Employee with id ${employeeId} does not exist`) : setEmployees([employee])  
+  }
+
   // Adds an employee by calling the EmployeeService, which has a method that actually adds an employee to the DB
   const addEmployee = async (employee: {firstName: string, lastName: string, email:string}) => {
-    EmployeeService.addEmployee(employee)
+     await EmployeeService.addEmployee(employee)
   }
   
   // Deletes an employee by calling the EmployeeService, which has a method that actually deletes an employee from the DB
@@ -43,8 +50,8 @@ const App: React.FC = () => {
         <Navbar />
 
         <Routes>
-          <Route path="/" element={<EmployeeContainer onDelete={deleteEmployee} employees={employees}/>} />
-          <Route path="/add-employees" element={<AddEmployee onAdd={addEmployee} />} />
+          <Route path="/" element={<EmployeeContainer onSearch={getEmployeeById} onDelete={deleteEmployee} employees={employees}/>} />
+          <Route path="add-employees" element={<AddEmployee onAdd={addEmployee} />}/>
         </Routes>
 
       </div>
