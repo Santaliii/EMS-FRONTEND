@@ -1,5 +1,7 @@
+import { IEmployee } from "../interfaces/EmployeeInterfaces"
 
 const REST_API_ROOT_URL = "http://localhost:8080/api/v1/employees"
+
 
 class EmployeeService {
 
@@ -30,7 +32,7 @@ class EmployeeService {
       
   }
 
-  addEmployee = async (employee: {firstName: string, lastName: string, email:string}) => {
+  addEmployee = async (employee: IEmployee) => {
 
     try {
       const res = await fetch(REST_API_ROOT_URL, {
@@ -55,9 +57,6 @@ class EmployeeService {
       method: "DELETE",
     })
   }
-
- 
-
 
 }
 

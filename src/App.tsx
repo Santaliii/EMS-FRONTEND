@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import EmployeeContainer from './components/EmployeeContainer';
 import AddEmployee from './components/AddEmployee'
 import EmployeeService from './services/EmployeeService';
+import { IEmployeeWithID, IEmployee } from './interfaces/EmployeeInterfaces';
 
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 
@@ -10,7 +11,7 @@ import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 const App: React.FC = () => {
 
   // State of employees. Changed when employees change
-  const [employees, setEmployees] = useState([{} as {id: string, firstName: string, lastName: string, email: string}])
+  const [employees, setEmployees] = useState<IEmployeeWithID[]>([])
 
   // Re-render the page after the state of employees has been changed
   useEffect(() => {
@@ -19,6 +20,7 @@ const App: React.FC = () => {
       const employees = await EmployeeService.getAllEmployees()
       setEmployees(employees)
     }
+    
     getEmployees()
 
   }, [employees])
@@ -32,7 +34,7 @@ const App: React.FC = () => {
   }
 
   // Adds an employee by calling the EmployeeService, which has a method that actually adds an employee to the DB
-  const addEmployee = async (employee: {firstName: string, lastName: string, email:string}) => {
+  const addEmployee = async (employee: IEmployee) => {
      await EmployeeService.addEmployee(employee)
   }
   

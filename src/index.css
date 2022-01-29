@@ -99,8 +99,13 @@ body {
     font-size: 1.05rem;
 }
 
+
+/* Targets the first cell of each row in the body, which is the employee ID */
+
 .employee-table tbody tr th:first-of-type {
     font-size: 1.4rem;
+    color: red;
+    font-style: italic;
 }
 
 
@@ -113,14 +118,6 @@ body {
 
 .employee-table tbody tr:hover {
     transform: scale(1.02);
-}
-
-
-/* Targets the first cell of each row in the body, which is the employee ID */
-
-.employee-table tbody tr th:first-of-type {
-    color: red;
-    font-style: italic;
 }
 
 

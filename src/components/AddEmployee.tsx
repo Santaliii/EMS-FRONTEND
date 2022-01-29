@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import  { useNavigate } from 'react-router-dom'
+import {IEmployee} from '../interfaces/EmployeeInterfaces'
 
 interface IAddEmployeeProps {
-  onAdd: (employee: {firstName: string, lastName: string, email:string}) => void
+  onAdd: (employee: IEmployee) => void
 }
 
 const AddEmployee: React.FC<IAddEmployeeProps> = ({onAdd}: IAddEmployeeProps) => {

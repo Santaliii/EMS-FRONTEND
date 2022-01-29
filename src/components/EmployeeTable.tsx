@@ -1,6 +1,6 @@
 import React from "react";
 import Employee from "./Employee"
-
+import {IEmployeeWithID} from '../interfaces/EmployeeInterfaces'
 interface IEmployeeTableProps {
   employees: {
     id: string;
@@ -9,13 +9,6 @@ interface IEmployeeTableProps {
     email: string;
   }[]
   onDelete: (id: string) => void
-}
-
-interface IEmployee {
-  id: string,
-  firstName: string,
-  lastName: string,
-  email: string,
 }
 
 
@@ -34,7 +27,7 @@ const EmployeeTable: React.FC<IEmployeeTableProps> = ({employees, onDelete}: IEm
         </thead>
         <tbody>
           {employees.map(
-            (employee: IEmployee)  => (<Employee key={employee.id} id={employee.id} 
+            (employee: IEmployeeWithID)  => (<Employee key={employee.id} id={employee.id} 
             firstName={employee.firstName} lastName={employee.lastName}
             email={employee.email} onDelete={onDelete}/>))}
         </tbody>
